@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerFit – Check Your Job Readiness Instantly</title>
+  <meta name="description" content="Evaluate your suitability for different job roles based on your skills and get personalized improvement suggestions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="animations.css" />
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#" class="nav-logo" onclick="showPage('landing')">
+      <img src="logo.png" alt="CareerFit Logo" class="logo-img" />
+      <span class="logo-text">CareerFit</span>
+    </a>
+    <div class="nav-actions">
+      <button class="btn-ghost" onclick="showPage('profile')" id="profileBtn">My Profile</button>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle dark/light mode">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wizard" id="progressWizard" style="display:none">
+  <div class="wizard-container">
+    <div class="wizard-step active" id="step1" onclick="showPage('roles')">
+      <div class="step-circle">1</div>
+      <span>Choose Role</span>
+    </div>
+    <div class="wizard-line" id="line1"></div>
+    <div class="wizard-step" id="step2" onclick="showPage('skills')">
+      <div class="step-circle">2</div>
+      <span>Add Skills</span>
+    </div>
+    <div class="wizard-line" id="line2"></div>
+    <div class="wizard-step" id="step3" onclick="showPage('results')">
+      <div class="step-circle">3</div>
+      <span>Results</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: LANDING ===== -->
+<main id="page-landing" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🚀 AI-Powered Career Analysis</div>
+      <h1 class="hero-title">Check Your <span class="gradient-text">Job Readiness</span> Instantly</h1>
+      <p class="hero-subtitle">Evaluate your skills, discover gaps, and get a personalized roadmap to land your dream job — all in minutes.</p>
+      <div class="hero-cta">
+        <button class="btn-primary btn-lg" onclick="showPage('roles')">Get Started Free →</button>
+        <button class="btn-ghost btn-lg" onclick="scrollToFeatures()">See How It Works</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Assessments Done</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">6</span><span class="stat-label">Job Roles</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">95%</span><span class="stat-label">User Satisfaction</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card card-1">
+        <div class="fc-icon">💻</div>
+        <div class="fc-text"><strong>Software Dev</strong><br/><small>85% Match</small></div>
+      </div>
+      <div class="floating-card card-2">
+        <div class="fc-icon">🎨</div>
+        <div class="fc-text"><strong>UI/UX Designer</strong><br/><small>72% Match</small></div>
+      </div>
+      <div class="floating-card card-3">
+        <div class="fc-icon">📊</div>
+        <div class="fc-text"><strong>Data Scientist</strong><br/><small>63% Match</small></div>
+      </div>
+      <div class="score-ring">
+        <svg viewBox="0 0 120 120" class="ring-svg">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(99,102,241,0.15)" stroke-width="10"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+            stroke-dasharray="251" stroke-dashoffset="38" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+          <defs>
+            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="ring-label"><span class="ring-num">85%</span><span class="ring-sub">Readiness</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section" id="features">
+    <div class="section-container">
+      <div class="section-badge">How It Works</div>
+      <h2 class="section-title">Three Steps to Career Clarity</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Skill Analysis</h3>
+          <p>Input your current skills and proficiency levels. Our engine maps them against industry standards.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Match Score</h3>
+          <p>Get an instant readiness score showing exactly how prepared you are for your chosen role.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗺️</div>
+          <h3>Career Roadmap</h3>
+          <p>Receive a step-by-step learning path with curated resources to close skill gaps fast.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Suggestions</h3>
+          <p>Smart recommendations personalized to your background, goals, and current market demand.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Course Resources</h3>
+          <p>Curated courses from top platforms like Coursera, Udemy, and freeCodeCamp for every skill.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💾</div>
+          <h3>Save & Share</h3>
+          <p>Save your results, track progress over time, and share your readiness report with employers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section">
+    <div class="section-container">
+      <div class="section-badge">Success Stories</div>
+      <h2 class="section-title">Loved by Job Seekers</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"CareerFit showed me exactly which skills I was missing for a Data Science role. Got my first job offer 3 months later!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">A</div>
+            <div><strong>Aryan Mehta</strong><br/><small>CS Graduate, 2024</small></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"The career roadmap was incredibly detailed. I went from 40% to 85% readiness in just 2 months following the suggestions."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:var(--accent-purple)">S</div>
+            <div><strong>Sara Ali</strong><br/><small>Career Switcher</small></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>"Best free tool for freshers. The skill gap analysis is spot-on and the course recommendations are actually useful."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:var(--accent-teal)">R</div>
+            <div><strong>Rohan Das</strong><br/><small>Fresher → DevOps Engineer</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="logo.png" alt="CareerFit Logo" class="logo-img" />
+        <span class="logo-text">CareerFit</span>
+        <p>Helping you land your dream job, one skill at a time.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="#" onclick="showPage('roles')">Assess Skills</a>
+          <a href="#" onclick="showPage('profile')">My Profile</a>
+          <a href="#features">How It Works</a>
+        </div>
+        <div class="footer-col">
+          <h4>Roles</h4>
+          <a href="#">Software Developer</a>
+          <a href="#">Data Scientist</a>
+          <a href="#">UI/UX Designer</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Blog</a>
+          <a href="#">Career Tips</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 CareerFit. Built for job seekers, by job seekers.</p>
+    </div>
+  </footer>
+</main>
+
+<!-- ===== PAGE: ROLES ===== -->
+<main id="page-roles" class="page">
+  <div class="page-container">
+    <div class="page-header">
+      <h1>Choose Your <span class="gradient-text">Target Role</span></h1>
+      <p>Select the job role you're aiming for. We'll analyze your skills against industry requirements.</p>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="roleSearch" placeholder="Search job roles..." oninput="filterRoles()" />
+      </div>
+    </div>
+    <div class="roles-grid" id="rolesGrid"></div>
+  </div>
+</main>
+
+<!-- ===== PAGE: SKILLS ===== -->
+<main id="page-skills" class="page">
+  <div class="page-container">
+    <div class="page-header">
+      <div class="back-btn" onclick="showPage('roles')">← Back</div>
+      <h1>Add Your <span class="gradient-text">Skills</span></h1>
+      <p id="skillsSubtitle">Select skills for your chosen role and set your proficiency level.</p>
+    </div>
+
+    <div class="skills-layout">
+      <div class="skills-panel">
+        <h3>Available Skills <span class="role-badge" id="currentRoleBadge"></span></h3>
+        <div class="skill-tags" id="skillTags"></div>
+      </div>
+
+      <div class="selected-panel">
+        <h3>Your Skills <span class="selected-count" id="selectedCount">0 selected</span></h3>
+        <div class="selected-skills" id="selectedSkills">
+          <div class="empty-skills">Click skills on the left to add them →</div>
+        </div>
+        <button class="btn-primary btn-full" onclick="analyzeSkills()" id="analyzeBtn" disabled>
+          Analyze My Readiness →
+        </button>
+      </div>
+    </div>
+
+    <!-- Custom skill input -->
+    <div class="custom-skill-section">
+      <h4>Add a Custom Skill</h4>
+      <div class="custom-skill-input">
+        <input type="text" id="customSkillInput" placeholder="e.g., TypeScript, Redux, Firebase..." />
+        <select id="customSkillLevel">
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate" selected>Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+        <button class="btn-secondary" onclick="addCustomSkill()">+ Add</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: RESULTS ===== -->
+<main id="page-results" class="page">
+  <div class="page-container">
+    <div class="results-header">
+      <div class="back-btn" onclick="showPage('skills')">← Back</div>
+      <div class="results-actions">
+        <button class="btn-ghost" onclick="saveResults()">💾 Save</button>
+        <button class="btn-ghost" onclick="shareResults()">📤 Share</button>
+        <button class="btn-primary" onclick="showPage('roles')">Try Another Role</button>
+      </div>
+    </div>
+
+    <div class="results-grid">
+      <!-- Score Card -->
+      <div class="score-card glass-card">
+        <h2>Your Readiness Score</h2>
+        <div class="score-ring-container">
+          <svg viewBox="0 0 200 200" class="score-svg" id="scoreSvg">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(99,102,241,0.1)" stroke-width="16"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="url(#scoreGrad)" stroke-width="16"
+              stroke-dasharray="502" stroke-dashoffset="502" stroke-linecap="round"
+              transform="rotate(-90 100 100)" id="scoreCircle"/>
+            <defs>
+              <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="score-center">
+            <span class="score-number" id="scoreNumber">0%</span>
+            <span class="score-label" id="scoreLabel">Calculating...</span>
+          </div>
+        </div>
+        <div class="role-result-badge" id="roleResultBadge"></div>
+      </div>
+
+      <!-- Skills Breakdown -->
+      <div class="breakdown-card glass-card">
+        <h2>Skills Breakdown</h2>
+        <div id="strongSkills" class="skill-group"></div>
+        <div id="weakSkills" class="skill-group"></div>
+        <div id="missingSkills" class="skill-group"></div>
+      </div>
+    </div>
+
+    <!-- Suggestions -->
+    <div class="suggestions-section glass-card">
+      <h2>🤖 AI Improvement Suggestions</h2>
+      <div class="suggestions-grid" id="suggestionsGrid"></div>
+    </div>
+
+    <!-- Courses -->
+    <div class="courses-section">
+      <h2>📚 Recommended Courses</h2>
+      <div class="courses-grid" id="coursesGrid"></div>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="roadmap-section glass-card">
+      <h2>🗺️ Career Roadmap</h2>
+      <div class="roadmap-timeline" id="roadmapTimeline"></div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: PROFILE ===== -->
+<main id="page-profile" class="page">
+  <div class="page-container">
+    <div class="page-header">
+      <h1>My <span class="gradient-text">Profile</span></h1>
+      <p>Track your assessment history and skill progress over time.</p>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-card glass-card">
+        <div class="profile-avatar">👤</div>
+        <h3>Career Seeker</h3>
+        <p class="profile-subtitle">Member since 2024</p>
+        <div class="profile-stats">
+          <div class="ps"><span id="totalAssessments">0</span><small>Assessments</small></div>
+          <div class="ps"><span id="bestScore">—</span><small>Best Score</small></div>
+          <div class="ps"><span id="totalSkills">0</span><small>Skills Added</small></div>
+        </div>
+      </div>
+      <div class="history-card glass-card">
+        <h3>Assessment History</h3>
+        <div id="historyList" class="history-list">
+          <div class="empty-history">No assessments yet. <a href="#" onclick="showPage('roles')">Start your first one!</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- AI Popup -->
+<div class="ai-popup" id="aiPopup">
+  <div class="ai-popup-header">
+    <span>🤖 AI Career Coach</span>
+    <button onclick="closeAiPopup()">✕</button>
+  </div>
+  <div class="ai-popup-body" id="aiPopupBody"></div>
+</div>
+<button class="ai-fab" id="aiFab" onclick="openAiPopup()" title="AI Career Coach">🤖</button>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
